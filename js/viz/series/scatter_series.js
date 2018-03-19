@@ -547,7 +547,7 @@ var baseScatterMethods = {
                 }, 0);
 
         options.size = pointOptions.visible ? maxSize : 0;
-        options.sourcePointSize = pointOptions.visible ? pointOptions.size : 0;
+        options.sourcePointSize = pointOptions.visible ? styles.normal.r * 2 + styles.normal["stroke-width"] : 0;
 
         return options;
     }

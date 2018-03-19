@@ -192,7 +192,8 @@ var checkGroups = function(assert, series) {
 
         assert.deepEqual(series.getMarginOptions(), {
             size: 14,
-            percentStick: false
+            percentStick: false,
+            sourcePointSize: 12
         });
     });
 

@@ -247,6 +247,7 @@ exports.stock = _extend({}, scatterSeries, {
                 }, 0);
 
         options.size = DEFAULT_FINANCIAL_POINT_SIZE + border;
+        options.sourcePointSize = DEFAULT_FINANCIAL_POINT_SIZE + styles.normal["stroke-width"];
 
         return options;
     }
