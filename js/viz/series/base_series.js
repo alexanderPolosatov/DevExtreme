@@ -819,7 +819,7 @@ Series.prototype = {
             aggregatedData = aggregationMethod(aggregationInfo, this),
             pointData = aggregatedData && this._getPointData(aggregatedData, this.getOptions());
 
-        if(pointData && this._checkData(pointData)) {
+        if(data.length && pointData && this._checkData(pointData)) {
             pointData.aggregationInfo = aggregationInfo;
             return pointData;
         }

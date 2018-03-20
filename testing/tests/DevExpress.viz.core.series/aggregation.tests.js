@@ -650,7 +650,7 @@ QUnit.test("Count. Do not calculate error bars", function(assert) {
 });
 
 QUnit.test("Points grouping by intervals", function(assert) {
-    this.argumentAxis.getTicks = () => { return { tickInterval: 5, ticks: [0, 5, 10] }; };
+    this.argumentAxis.getTicks = () => { return { tickInterval: 5, ticks: [0, 5, 10, 15] }; };
     var points = this.aggregateData("avg", this.data);
     assert.equal(points.length, 2);
     assert.equal(points[0].argument, 0);
