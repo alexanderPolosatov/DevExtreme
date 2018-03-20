@@ -1355,48 +1355,6 @@ var checkTwoGroups = function(assert, series) {
         });
     });
 
-    QUnit.test("_get Point size visible point", function(assert) {
-        var series = createSeries({
-            type: seriesType,
-            point: {
-                size: 10,
-                hoverStyle: {
-                    size: 50
-                },
-                selectionStyle: {
-                    size: 100
-                },
-                visible: true
-            }
-        });
-
-        series.updateData(this.data);
-        series.createPoints();
-
-        assert.equal(series._getPointSize(), 10);
-    });
-
-    QUnit.test("_get Point size invisible point", function(assert) {
-        var series = createSeries({
-            type: seriesType,
-            point: {
-                size: 10,
-                hoverStyle: {
-                    size: 50
-                },
-                selectionStyle: {
-                    size: 100
-                },
-                visible: false
-            }
-        });
-
-        series.updateData(this.data);
-        series.createPoints();
-
-        assert.equal(series._getPointSize(), 2);
-    });
-
     QUnit.module("Scatter. Customize point", {
         beforeEach: function() {
             environment.beforeEach.call(this);

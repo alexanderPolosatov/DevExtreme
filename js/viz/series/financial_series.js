@@ -225,10 +225,6 @@ exports.stock = _extend({}, scatterSeries, {
         }
     },
 
-    _getPointSize: function() {
-        return DEFAULT_FINANCIAL_POINT_SIZE;
-    },
-
     getValueFields: function() {
         var options = this._options;
         return [options.openValueField || "open", options.highValueField || "high", options.lowValueField || "low", options.closeValueField || "close"];

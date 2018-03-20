@@ -17,7 +17,6 @@ var _extend = require("../../core/utils/extend").extend,
     _sqrt = math.sqrt,
     _max = math.max,
 
-    DEFAULT_SYMBOL_POINT_SIZE = 2,
     DEFAULT_TRACKER_WIDTH = 12,
     DEFAULT_DURATION = 400,
 
@@ -353,10 +352,6 @@ var baseScatterMethods = {
         _each(that._drawnPoints || [], function(i, p) {
             p.animate(i === lastPointIndex ? function() { that._animateComplete(); } : undefined, { translateX: p.x, translateY: p.y });
         });
-    },
-
-    _getPointSize: function() {
-        return this._options.point.visible ? this._options.point.size : DEFAULT_SYMBOL_POINT_SIZE;
     },
 
     _defaultAggregator: "avg",
