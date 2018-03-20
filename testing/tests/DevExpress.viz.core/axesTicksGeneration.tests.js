@@ -996,10 +996,10 @@ QUnit.test("getTicks. Default divisionFactor", function(assert) {
 
     ticks = this.axis.getTicks();
 
-    assert.strictEqual(ticks.ticks.length, 46);
-    assert.strictEqual(ticks.tickInterval, 0.2);
+    assert.strictEqual(ticks.ticks.length, 10);
+    assert.strictEqual(ticks.tickInterval, 1);
     assert.strictEqual(ticks.ticks[0], 1);
-    assert.strictEqual(ticks.ticks[45], 10);
+    assert.strictEqual(ticks.ticks[9], 10);
 });
 
 QUnit.module("Numeric. Minor ticks", environment);

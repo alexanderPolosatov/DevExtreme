@@ -1153,7 +1153,7 @@ Axis.prototype = {
 
         return getTickGenerator(extend({}, options, {
             endOnTick: true,
-            axisDivisionFactor: options.aggregationGroupWidth || marginOptions && (marginOptions.sourcePointSize) || 2
+            axisDivisionFactor: options.aggregationGroupWidth || marginOptions && (marginOptions.sourcePointSize) || 10
         }), _noop, false)(
             {
                 min: viewPort.minVisible,
