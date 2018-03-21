@@ -884,14 +884,14 @@ QUnit.test("Pass merged marginOptions to axes", function(assert) {
         size: 8,
         checkInterval: true,
         percentStick: true,
-        sourcePointSize: 0
+        sizePointNormalState: 0
     });
 
     assert.deepEqual(chart._argumentAxes[0].setMarginOptions.lastCall.args[0], {
         size: 8,
         checkInterval: true,
         percentStick: true,
-        sourcePointSize: 0
+        sizePointNormalState: 0
     });
 });
 
@@ -939,21 +939,21 @@ QUnit.test("Pass merged marginOptions to axes when two value axis", function(ass
         checkInterval: false,
         size: 8,
         percentStick: false,
-        sourcePointSize: 0
+        sizePointNormalState: 0
     });
 
     assert.deepEqual(chart._valueAxes[1].setMarginOptions.lastCall.args[0], {
         checkInterval: true,
         size: 5,
         percentStick: true,
-        sourcePointSize: 0
+        sizePointNormalState: 0
     });
 
     assert.deepEqual(chart._argumentAxes[0].setMarginOptions.lastCall.args[0], {
         size: 8,
         checkInterval: true,
         percentStick: true,
-        sourcePointSize: 0
+        sizePointNormalState: 0
     });
 });
 
@@ -1014,7 +1014,7 @@ QUnit.test("pointSize merging", function(assert) {
             checkInterval: false,
             size: 8,
             percentStick: true,
-            sourcePointSize: 8
+            sizePointNormalState: 8
         }
     }));
 
@@ -1023,7 +1023,7 @@ QUnit.test("pointSize merging", function(assert) {
             checkInterval: true,
             size: 5,
             percentStick: false,
-            sourcePointSize: 5
+            sizePointNormalState: 5
         }
     }));
 
@@ -1035,6 +1035,6 @@ QUnit.test("pointSize merging", function(assert) {
         size: 8,
         checkInterval: true,
         percentStick: true,
-        sourcePointSize: 8
+        sizePointNormalState: 8
     });
 });

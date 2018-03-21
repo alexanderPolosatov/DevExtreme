@@ -977,7 +977,7 @@ QUnit.test("getAggregationInfo. Without divisionFactor", function(assert) {
 
     this.axis.setBusinessRange({ minVisible: 1, maxVisible: 10, addRange: function() { } });
     this.axis.createTicks(canvas(170));
-    this.axis.setMarginOptions({ sourcePointSize: 20 });
+    this.axis.setMarginOptions({ sizePointNormalState: 20 });
     // act
 
     aggregationInfo = this.axis.getAggregationInfo();

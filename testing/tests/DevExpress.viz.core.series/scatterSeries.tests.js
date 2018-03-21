@@ -2814,7 +2814,7 @@ QUnit.test("Return point size", function(assert) {
     assert.deepEqual(series.getMarginOptions(), {
         size: 6,
         percentStick: false,
-        sourcePointSize: 6
+        sizePointNormalState: 6
     });
 });
 
@@ -2830,7 +2830,7 @@ QUnit.test("Point is invisible - return 0", function(assert) {
     assert.deepEqual(series.getMarginOptions(), {
         size: 0,
         percentStick: false,
-        sourcePointSize: 0
+        sizePointNormalState: 0
     });
 });
 
@@ -2862,7 +2862,7 @@ QUnit.test("Add max border width", function(assert) {
     assert.deepEqual(series.getMarginOptions(), {
         size: 30,
         percentStick: false,
-        sourcePointSize: 26
+        sizePointNormalState: 26
     });
 });
 
@@ -2878,7 +2878,7 @@ QUnit.test("Polar point. getMarginOptions returns point size", function(assert) 
     assert.deepEqual(series.getMarginOptions(), {
         size: 6,
         percentStick: false,
-        sourcePointSize: 6
+        sizePointNormalState: 6
     });
 });
 
@@ -2910,6 +2910,6 @@ QUnit.test("getMarginOptions returns '0' as sourcePointStyle when points are inv
     assert.deepEqual(series.getMarginOptions(), {
         size: 0,
         percentStick: false,
-        sourcePointSize: 0
+        sizePointNormalState: 0
     });
 });
