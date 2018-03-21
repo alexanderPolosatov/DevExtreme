@@ -243,6 +243,32 @@ function correctMarginExtremum(value, margins, maxMinDistance, roundingMethod) {
     return adjust(roundingMethod(adjust(value / maxDivider)) * maxDivider);
 }
 
+function configureGenerator(options, axisDivisionFactor, viewPort, screenDelta) {
+    var tickGeneratorOptions = extend({}, options, {
+        endOnTick: true,
+        axisDivisionFactor: axisDivisionFactor
+    });
+
+    return function(tickInterval, skipTickGeneration, min, max) {
+        return getTickGenerator(tickGeneratorOptions, _noop, skipTickGeneration)(
+            {
+                min: min,
+                max: max,
+                categories: viewPort.categories,
+                isSpacedMargin: viewPort.isSpacedMargin,
+                checkMinDataVisibility: viewPort.checkMinDataVisibility,
+                checkMaxDataVisibility: viewPort.checkMaxDataVisibility
+            },
+            screenDelta,
+            tickInterval,
+            isDefined(tickInterval),
+            {
+                majors: options.customTicks
+            }
+            );
+    };
+}
+
 Axis = exports.Axis = function(renderSettings) {
     var that = this;
 
@@ -1143,36 +1169,24 @@ Axis.prototype = {
         return ticks;
     },
 
-    getTicks: function() {
-        var options = this._options,
-            customTicks = options.customTicks,
-            customMinorTicks = options.customMinorTicks,
-            tickInterval = options.aggregationInterval,
-            marginOptions = this._marginOptions,
-            viewPort = this.getTranslator().getBusinessRange();
+    getTicks() {
+        var that = this,
+            options = that._options,
+            marginOptions = that._marginOptions,
+            axisDivisionFactor = options.aggregationGroupWidth || marginOptions && (marginOptions.sourcePointSize) || 10,
+            viewPort = that.getTranslator().getBusinessRange(),
+            zoomArgs = that._zoomArgs,
+            add = getAddFunction(viewPort, false),
+            min = zoomArgs && zoomArgs.min || viewPort.minVisible,
+            max = zoomArgs && zoomArgs.max || viewPort.maxVisible,
+            maxMinDistance = add(max, -min),
+            generateTicks = configureGenerator(options, axisDivisionFactor, viewPort, that._getScreenDelta()),
+            tickInterval = generateTicks(options.aggregationInterval, true, viewPort.minVisible, viewPort.maxVisible).tickInterval;
 
-        return getTickGenerator(extend({}, options, {
-            endOnTick: true,
-            axisDivisionFactor: options.aggregationGroupWidth || marginOptions && (marginOptions.sourcePointSize) || 10
-        }), _noop, false)(
-            {
-                min: viewPort.minVisible,
-                max: viewPort.maxVisible,
-                categories: viewPort.categories,
-                isSpacedMargin: viewPort.isSpacedMargin,
-                checkMinDataVisibility: viewPort.checkMinDataVisibility,
-                checkMaxDataVisibility: viewPort.checkMaxDataVisibility
-            },
-            this._getScreenDelta(),
-            tickInterval,
-            isDefined(tickInterval),
-            {
-                majors: customTicks,
-                minors: customMinorTicks
-            },
-            options.minorTickInterval,
-            options.minorTickCount
-        );
+        return {
+            tickInterval: tickInterval,
+            ticks: that._options.type === constants.discrete ? [] : generateTicks(tickInterval, false, add(min, -maxMinDistance), add(max, maxMinDistance)).ticks
+        };
     },
 
     createTicks: function(canvas) {

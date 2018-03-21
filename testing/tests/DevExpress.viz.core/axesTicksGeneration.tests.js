@@ -921,7 +921,8 @@ QUnit.test("getTicks with tickInterval", function(assert) {
     ticks = this.axis.getTicks();
 
     assert.strictEqual(ticks.tickInterval, 2);
-    assert.deepEqual(ticks.ticks, [0, 2, 4, 6, 8, 10]);
+    assert.deepEqual(ticks.ticks[0], -8);
+    assert.deepEqual(ticks.ticks[ticks.ticks.length - 1], 20);
 });
 
 QUnit.test("getTicks. Ticks was generated with endOnTick", function(assert) {
@@ -940,7 +941,8 @@ QUnit.test("getTicks. Ticks was generated with endOnTick", function(assert) {
 
     ticks = this.axis.getTicks();
 
-    assert.deepEqual(ticks.ticks, [0, 5, 10, 15]);
+    assert.deepEqual(ticks.ticks[0], -5);
+    assert.deepEqual(ticks.ticks[ticks.ticks.length - 1], 20);
 });
 
 QUnit.test("getTicks. With divisionFactor", function(assert) {
@@ -959,7 +961,9 @@ QUnit.test("getTicks. With divisionFactor", function(assert) {
 
     ticks = this.axis.getTicks();
 
-    assert.deepEqual(ticks.ticks, [0, 2, 4, 6, 8, 10]);
+    assert.strictEqual(ticks.tickInterval, 2);
+    assert.deepEqual(ticks.ticks[0], -8);
+    assert.deepEqual(ticks.ticks[ticks.ticks.length - 1], 20);
 });
 
 QUnit.test("getTicks. Without divisionFactor", function(assert) {
@@ -978,7 +982,9 @@ QUnit.test("getTicks. Without divisionFactor", function(assert) {
 
     ticks = this.axis.getTicks();
 
-    assert.deepEqual(ticks.ticks, [0, 2, 4, 6, 8, 10]);
+    assert.strictEqual(ticks.tickInterval, 2);
+    assert.deepEqual(ticks.ticks[0], -8);
+    assert.deepEqual(ticks.ticks[ticks.ticks.length - 1], 20);
 });
 
 QUnit.test("getTicks. Default divisionFactor", function(assert) {
@@ -996,10 +1002,71 @@ QUnit.test("getTicks. Default divisionFactor", function(assert) {
 
     ticks = this.axis.getTicks();
 
-    assert.strictEqual(ticks.ticks.length, 10);
+    assert.strictEqual(ticks.ticks.length, 28);
     assert.strictEqual(ticks.tickInterval, 1);
+    assert.strictEqual(ticks.ticks[0], -8);
+    assert.strictEqual(ticks.ticks[ticks.ticks.length - 1], 19);
+});
+
+QUnit.test("getTicks with zooming", function(assert) {
+    var ticks;
+
+    this.createAxis();
+    this.updateOptions({
+        argumentType: "numeric",
+        type: "continuous"
+    });
+
+    this.axis.setBusinessRange({ min: 1, max: 10, addRange: function() { } });
+    this.axis.zoom(3, 5);
+    this.axis.createTicks(canvas(170));
+
+    ticks = this.axis.getTicks();
+
+    assert.strictEqual(ticks.tickInterval, 0.2);
+    assert.strictEqual(ticks.ticks.length, 31);
     assert.strictEqual(ticks.ticks[0], 1);
-    assert.strictEqual(ticks.ticks[9], 10);
+    assert.strictEqual(ticks.ticks[ticks.ticks.length - 1], 7);
+});
+
+QUnit.test("getTicks with min/max", function(assert) {
+    var ticks;
+
+    this.createAxis();
+    this.updateOptions({
+        argumentType: "numeric",
+        type: "continuous",
+        min: 3,
+        max: 5
+    });
+
+    this.axis.setBusinessRange({ min: 1, max: 10, addRange: function() { } });
+    this.axis.createTicks(canvas(170));
+
+    ticks = this.axis.getTicks();
+
+    assert.strictEqual(ticks.tickInterval, 0.2);
+    assert.strictEqual(ticks.ticks.length, 31);
+    assert.strictEqual(ticks.ticks[0], 1);
+    assert.strictEqual(ticks.ticks[ticks.ticks.length - 1], 7);
+});
+
+QUnit.test("getTicks for discrete axis", function(assert) {
+    var ticks;
+
+    this.createAxis();
+    this.updateOptions({
+        argumentType: "string",
+        type: "discrete"
+    });
+
+    this.axis.setBusinessRange({ categories: ["a", "b", "c"], addRange: function() { } });
+    this.axis.createTicks(canvas(170));
+
+    ticks = this.axis.getTicks();
+
+    assert.strictEqual(ticks.tickInterval, 1);
+    assert.deepEqual(ticks.ticks, []);
 });
 
 QUnit.module("Numeric. Minor ticks", environment);
