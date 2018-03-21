@@ -41,6 +41,7 @@ var vizUtils = require("../core/utils"),
 
     DEFAULT_AXIS_DIVISION_FACTOR = 50,
     DEFAULT_MINOR_AXIS_DIVISION_FACTOR = 15,
+    DEFAULT_AGGREGATION_GROUP_WIDTH = 10,
 
     Axis;
 
@@ -1173,7 +1174,7 @@ Axis.prototype = {
         var that = this,
             options = that._options,
             marginOptions = that._marginOptions,
-            axisDivisionFactor = options.aggregationGroupWidth || marginOptions && (marginOptions.sourcePointSize) || 10,
+            axisDivisionFactor = options.aggregationGroupWidth || marginOptions && (marginOptions.sourcePointSize) || DEFAULT_AGGREGATION_GROUP_WIDTH,
             viewPort = that.getTranslator().getBusinessRange(),
             zoomArgs = that._zoomArgs,
             add = getAddFunction(viewPort, false),
