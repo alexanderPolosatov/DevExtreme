@@ -375,7 +375,7 @@ Series.prototype = {
         var data = this._data || [];
 
         if(this.useAggregation()) {
-            data = this._resample(this.getArgumentAxis().getTicks(), data);
+            data = this._resample(this.getArgumentAxis().getAggregationInfo(), data);
         }
 
         return data;
@@ -827,7 +827,7 @@ Series.prototype = {
         return null;
     },
 
-    _resample({ tickInterval, ticks }, data) {
+    _resample({ intervalsDistance, intervals }, data) {
         var that = this,
             aggregatedData = [],
             isDiscrete = that.argumentAxisType === DISCRETE || that.valueAxisType === DISCRETE,
@@ -836,10 +836,10 @@ Series.prototype = {
         if(isDiscrete) {
             return data.reduce((result, dataItem, index, data) => {
                 result[1].push(dataItem);
-                if(index === data.length - 1 || (index + 1) % tickInterval === 0) {
+                if(index === data.length - 1 || (index + 1) % intervalsDistance === 0) {
                     const dataInInterval = result[1];
                     const aggregatedDataItem = this._fusionData(dataInInterval, {
-                        aggregationInterval: tickInterval
+                        aggregationInterval: intervalsDistance
                     }, isDiscrete);
                     if(aggregatedDataItem) {
                         result[0].push(aggregatedDataItem);
@@ -851,17 +851,17 @@ Series.prototype = {
             }, [[], []])[0];
         }
 
-        for(let i = 1; i < ticks.length; i++) {
-            const intervalEnd = ticks[i];
+        for(let i = 1; i < intervals.length; i++) {
+            const intervalEnd = intervals[i];
             const dataInInterval = [];
             while(data[dataIndex] && data[dataIndex].argument < intervalEnd) {
                 dataInInterval.push(data[dataIndex]);
                 dataIndex++;
             }
             const aggregatedDataItem = this._fusionData(dataInInterval, {
-                intervalStart: ticks[i - 1],
+                intervalStart: intervals[i - 1],
                 intervalEnd,
-                aggregationInterval: tickInterval
+                aggregationInterval: intervalsDistance
             });
             if(aggregatedDataItem) {
                 aggregatedData.push(aggregatedDataItem);

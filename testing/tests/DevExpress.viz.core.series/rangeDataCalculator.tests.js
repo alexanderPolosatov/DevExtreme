@@ -23,10 +23,10 @@ var createSeries = function(options, renderSettings, widgetType) {
     renderSettings.argumentAxis = renderSettings.argumentAxis || {
         getViewport: function() {},
         calculateInterval: function(a, b) { return Math.abs(a - b); },
-        getTicks: function() {
+        getAggregationInfo: function() {
             return {
-                tickInterval: 1,
-                ticks: [2, 5, 10, 20, 25]
+                intervalsDistance: 1,
+                intervals: [2, 5, 10, 20, 25]
             };
         }
     };

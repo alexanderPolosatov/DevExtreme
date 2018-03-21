@@ -903,8 +903,8 @@ QUnit.test("Add extra tick (logarithmic, numeric) for the bar point is equal to 
     assert.deepEqual(this.axis._tickInterval, 1);
 });
 
-QUnit.test("getTicks with tickInterval", function(assert) {
-    var ticks;
+QUnit.test("getAggregationInfo with tickInterval", function(assert) {
+    var aggregationInfo;
 
     this.createAxis();
 
@@ -918,15 +918,15 @@ QUnit.test("getTicks with tickInterval", function(assert) {
     this.axis.createTicks(canvas(1000));
     // act
 
-    ticks = this.axis.getTicks();
+    aggregationInfo = this.axis.getAggregationInfo();
 
-    assert.strictEqual(ticks.tickInterval, 2);
-    assert.deepEqual(ticks.ticks[0], -8);
-    assert.deepEqual(ticks.ticks[ticks.ticks.length - 1], 20);
+    assert.strictEqual(aggregationInfo.intervalsDistance, 2);
+    assert.deepEqual(aggregationInfo.intervals[0], -8);
+    assert.deepEqual(aggregationInfo.intervals[aggregationInfo.intervals.length - 1], 20);
 });
 
-QUnit.test("getTicks. Ticks was generated with endOnTick", function(assert) {
-    var ticks;
+QUnit.test("getAggregationInfo. Ticks was generated with endOnTick", function(assert) {
+    var aggregationInfo;
 
     this.createAxis();
     this.updateOptions({
@@ -939,14 +939,14 @@ QUnit.test("getTicks. Ticks was generated with endOnTick", function(assert) {
     this.axis.createTicks(canvas(170));
     // act
 
-    ticks = this.axis.getTicks();
+    aggregationInfo = this.axis.getAggregationInfo();
 
-    assert.deepEqual(ticks.ticks[0], -5);
-    assert.deepEqual(ticks.ticks[ticks.ticks.length - 1], 20);
+    assert.deepEqual(aggregationInfo.intervals[0], -5);
+    assert.deepEqual(aggregationInfo.intervals[aggregationInfo.intervals.length - 1], 20);
 });
 
-QUnit.test("getTicks. With divisionFactor", function(assert) {
-    var ticks;
+QUnit.test("getAggregationInfo. With divisionFactor", function(assert) {
+    var aggregationInfo;
 
     this.createAxis();
     this.updateOptions({
@@ -959,15 +959,15 @@ QUnit.test("getTicks. With divisionFactor", function(assert) {
     this.axis.createTicks(canvas(170));
     // act
 
-    ticks = this.axis.getTicks();
+    aggregationInfo = this.axis.getAggregationInfo();
 
-    assert.strictEqual(ticks.tickInterval, 2);
-    assert.deepEqual(ticks.ticks[0], -8);
-    assert.deepEqual(ticks.ticks[ticks.ticks.length - 1], 20);
+    assert.strictEqual(aggregationInfo.intervalsDistance, 2);
+    assert.deepEqual(aggregationInfo.intervals[0], -8);
+    assert.deepEqual(aggregationInfo.intervals[aggregationInfo.intervals.length - 1], 20);
 });
 
-QUnit.test("getTicks. Without divisionFactor", function(assert) {
-    var ticks;
+QUnit.test("getAggregationInfo. Without divisionFactor", function(assert) {
+    var aggregationInfo;
 
     this.createAxis();
     this.updateOptions({
@@ -980,15 +980,15 @@ QUnit.test("getTicks. Without divisionFactor", function(assert) {
     this.axis.setMarginOptions({ sourcePointSize: 20 });
     // act
 
-    ticks = this.axis.getTicks();
+    aggregationInfo = this.axis.getAggregationInfo();
 
-    assert.strictEqual(ticks.tickInterval, 2);
-    assert.deepEqual(ticks.ticks[0], -8);
-    assert.deepEqual(ticks.ticks[ticks.ticks.length - 1], 20);
+    assert.strictEqual(aggregationInfo.intervalsDistance, 2);
+    assert.deepEqual(aggregationInfo.intervals[0], -8);
+    assert.deepEqual(aggregationInfo.intervals[aggregationInfo.intervals.length - 1], 20);
 });
 
-QUnit.test("getTicks. Default divisionFactor", function(assert) {
-    var ticks;
+QUnit.test("getAggregationInfo. Default divisionFactor", function(assert) {
+    var aggregationInfo;
 
     this.createAxis();
     this.updateOptions({
@@ -1000,16 +1000,16 @@ QUnit.test("getTicks. Default divisionFactor", function(assert) {
     this.axis.createTicks(canvas(170));
     // act
 
-    ticks = this.axis.getTicks();
+    aggregationInfo = this.axis.getAggregationInfo();
 
-    assert.strictEqual(ticks.ticks.length, 28);
-    assert.strictEqual(ticks.tickInterval, 1);
-    assert.strictEqual(ticks.ticks[0], -8);
-    assert.strictEqual(ticks.ticks[ticks.ticks.length - 1], 19);
+    assert.strictEqual(aggregationInfo.intervals.length, 28);
+    assert.strictEqual(aggregationInfo.intervalsDistance, 1);
+    assert.strictEqual(aggregationInfo.intervals[0], -8);
+    assert.strictEqual(aggregationInfo.intervals[aggregationInfo.intervals.length - 1], 19);
 });
 
-QUnit.test("getTicks with zooming", function(assert) {
-    var ticks;
+QUnit.test("getAggregationInfo with zooming", function(assert) {
+    var aggregationInfo;
 
     this.createAxis();
     this.updateOptions({
@@ -1021,16 +1021,16 @@ QUnit.test("getTicks with zooming", function(assert) {
     this.axis.zoom(3, 5);
     this.axis.createTicks(canvas(170));
 
-    ticks = this.axis.getTicks();
+    aggregationInfo = this.axis.getAggregationInfo();
 
-    assert.strictEqual(ticks.tickInterval, 0.2);
-    assert.strictEqual(ticks.ticks.length, 31);
-    assert.strictEqual(ticks.ticks[0], 1);
-    assert.strictEqual(ticks.ticks[ticks.ticks.length - 1], 7);
+    assert.strictEqual(aggregationInfo.intervalsDistance, 0.2);
+    assert.strictEqual(aggregationInfo.intervals.length, 31);
+    assert.strictEqual(aggregationInfo.intervals[0], 1);
+    assert.strictEqual(aggregationInfo.intervals[aggregationInfo.intervals.length - 1], 7);
 });
 
-QUnit.test("getTicks with min/max", function(assert) {
-    var ticks;
+QUnit.test("getAggregationInfo with min/max", function(assert) {
+    var aggregationInfo;
 
     this.createAxis();
     this.updateOptions({
@@ -1043,16 +1043,16 @@ QUnit.test("getTicks with min/max", function(assert) {
     this.axis.setBusinessRange({ min: 1, max: 10, addRange: function() { } });
     this.axis.createTicks(canvas(170));
 
-    ticks = this.axis.getTicks();
+    aggregationInfo = this.axis.getAggregationInfo();
 
-    assert.strictEqual(ticks.tickInterval, 0.2);
-    assert.strictEqual(ticks.ticks.length, 31);
-    assert.strictEqual(ticks.ticks[0], 1);
-    assert.strictEqual(ticks.ticks[ticks.ticks.length - 1], 7);
+    assert.strictEqual(aggregationInfo.intervalsDistance, 0.2);
+    assert.strictEqual(aggregationInfo.intervals.length, 31);
+    assert.strictEqual(aggregationInfo.intervals[0], 1);
+    assert.strictEqual(aggregationInfo.intervals[aggregationInfo.intervals.length - 1], 7);
 });
 
-QUnit.test("getTicks for discrete axis", function(assert) {
-    var ticks;
+QUnit.test("getAggregationInfo for discrete axis", function(assert) {
+    var aggregationInfo;
 
     this.createAxis();
     this.updateOptions({
@@ -1063,10 +1063,10 @@ QUnit.test("getTicks for discrete axis", function(assert) {
     this.axis.setBusinessRange({ categories: ["a", "b", "c"], addRange: function() { } });
     this.axis.createTicks(canvas(170));
 
-    ticks = this.axis.getTicks();
+    aggregationInfo = this.axis.getAggregationInfo();
 
-    assert.strictEqual(ticks.tickInterval, 1);
-    assert.deepEqual(ticks.ticks, []);
+    assert.strictEqual(aggregationInfo.intervalsDistance, 1);
+    assert.deepEqual(aggregationInfo.intervals, []);
 });
 
 QUnit.module("Numeric. Minor ticks", environment);

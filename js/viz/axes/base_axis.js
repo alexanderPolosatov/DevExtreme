@@ -1170,7 +1170,7 @@ Axis.prototype = {
         return ticks;
     },
 
-    getTicks() {
+    getAggregationInfo() {
         var that = this,
             options = that._options,
             marginOptions = that._marginOptions,
@@ -1185,8 +1185,8 @@ Axis.prototype = {
             tickInterval = generateTicks(options.aggregationInterval, true, viewPort.minVisible, viewPort.maxVisible).tickInterval;
 
         return {
-            tickInterval: tickInterval,
-            ticks: that._options.type === constants.discrete ? [] : generateTicks(tickInterval, false, add(min, -maxMinDistance), add(max, maxMinDistance)).ticks
+            intervalsDistance: tickInterval,
+            intervals: that._options.type === constants.discrete ? [] : generateTicks(tickInterval, false, add(min, -maxMinDistance), add(max, maxMinDistance)).ticks
         };
     },
 
