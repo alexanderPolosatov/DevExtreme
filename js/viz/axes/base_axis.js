@@ -1172,7 +1172,7 @@ Axis.prototype = {
         return ticks;
     },
 
-    getAggregationInfo() {
+    getAggregationInfo(useAllAggregatedPoints) {
         var that = this,
             options = that._options,
             marginOptions = that._marginOptions,
@@ -1184,11 +1184,13 @@ Axis.prototype = {
                 axisType: options.type,
                 dataType: options.dataType
             }, false, true),
-            min = zoomArgs && zoomArgs.min || viewPort.minVisible,
-            max = zoomArgs && zoomArgs.max || viewPort.maxVisible,
-            maxMinDistance = add(max, min, -1),
+            minVisible = zoomArgs && zoomArgs.min || viewPort.minVisible,
+            maxVisible = zoomArgs && zoomArgs.max || viewPort.maxVisible,
+            min = useAllAggregatedPoints ? viewPort.min : minVisible,
+            max = useAllAggregatedPoints ? viewPort.max : maxVisible,
+            maxMinDistance = useAllAggregatedPoints ? 0 : add(max, min, -1),
             generateTicks = configureGenerator(options, axisDivisionFactor, viewPort, that._getScreenDelta()),
-            tickInterval = generateTicks(options.aggregationInterval, true, viewPort.minVisible, viewPort.maxVisible).tickInterval;
+            tickInterval = generateTicks(options.aggregationInterval, true, minVisible, maxVisible).tickInterval;
 
         return {
             interval: tickInterval,

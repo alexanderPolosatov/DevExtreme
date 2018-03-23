@@ -7,6 +7,7 @@ var seriesNS = {},
     pointModule = require("./points/base_point"),
     _isDefined = typeUtils.isDefined,
     vizUtils = require("../core/utils"),
+    mathUtils = require("../../core/utils/math"),
     _isEmptyObject = typeUtils.isEmptyObject,
     _normalizeEnum = vizUtils.normalizeEnum,
     _noop = require("../../core/utils/common").noop,
@@ -375,7 +376,7 @@ Series.prototype = {
         var data = this._data || [];
 
         if(this.useAggregation()) {
-            data = this._resample(this.getArgumentAxis().getAggregationInfo(), data);
+            data = this._resample(this.getArgumentAxis().getAggregationInfo(this._useAllAggregatedPoints), data);
         }
 
         return data;
@@ -387,7 +388,56 @@ Series.prototype = {
         return aggregation && aggregation.enabled;
     },
 
-    createPoints: function() {
+    createPoints: function(useAllAggregatedPoints) {
+        var that = this,
+            isAggregationZooming = that.useAggregation() && that._checkZooming();
+
+        if(_isDefined(useAllAggregatedPoints) || !that._useAllAggregatedPoints || isAggregationZooming) {
+            that._normalizeUsingAllAggregatedPoints(useAllAggregatedPoints);
+            that._createPoints();
+            return true;
+        }
+        return false;
+    },
+
+    _checkZooming: function() {
+        var that = this,
+            argumentAxis = that.getArgumentAxis(),
+            viewport,
+            businessRange,
+            min,
+            max,
+            distance,
+            precision,
+            viewportSizeChanged;
+
+        if(!argumentAxis || !argumentAxis.getTranslator) {
+            return false;
+        }
+
+        viewport = argumentAxis.getViewport();
+        businessRange = argumentAxis.getTranslator().getBusinessRange();
+        min = viewport ? viewport.min : businessRange.minVisible;
+        max = viewport ? viewport.max : businessRange.maxVisible;
+
+        if(that.argumentAxisType === "logarithmic") {
+            min = vizUtils.getLog(min, businessRange.base);
+            max = vizUtils.getLog(max, businessRange.base);
+        }
+        distance = that.argumentAxisType === DISCRETE ? vizUtils.getCategoriesInfo(businessRange.categories, min, max).categories.length : Math.abs(max - min);
+        precision = mathUtils.getPrecision(distance);
+        precision = precision > 1 ? Math.pow(10, precision - 2) : 1;
+        viewportSizeChanged = Math.round((that._viewportLength - distance) * precision) / precision !== 0;
+        that._viewportLength = distance;
+
+        return viewportSizeChanged;
+    },
+
+    _normalizeUsingAllAggregatedPoints: function(useAllAggregatedPoints) {
+        this._useAllAggregatedPoints = this.useAggregation() && (this.argumentAxisType === DISCRETE || ((this._data || []).length > 1 && !!useAllAggregatedPoints));
+    },
+
+    _createPoints: function() {
         var that = this,
             allPoints = that._allPoints = (that._points || []).slice(),
             oldPointsByArgument = that.pointsByArgument || {},
@@ -891,10 +941,12 @@ Series.prototype = {
     },
 
     getAllPoints: function() {
+        this._createAllAggregatedPoints();
         return (this._points || []).slice();
     },
 
     getPointByPos: function(pos) {
+        this._createAllAggregatedPoints();
         return (this._points || [])[pos];
     },
 
@@ -1007,7 +1059,18 @@ Series.prototype = {
     },
 
     getPointsByArg: function(arg) {
-        return this.pointsByArgument[arg.valueOf()] || [];
+        var that = this,
+            argValue = arg.valueOf(),
+            points = that.pointsByArgument[argValue];
+
+        if(!points && that._createAllAggregatedPoints()) {
+            points = that.pointsByArgument[argValue];
+        }
+        return points || [];
+    },
+
+    _createAllAggregatedPoints: function() {
+        return this.useAggregation() && !this._useAllAggregatedPoints && this.createPoints(true);
     },
 
     getPointsByKeys: function(arg) {
