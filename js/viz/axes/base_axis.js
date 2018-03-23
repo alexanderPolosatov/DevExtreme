@@ -1192,7 +1192,7 @@ Axis.prototype = {
 
         return {
             interval: tickInterval,
-            ticks: that._options.type === constants.discrete ? [] : generateTicks(tickInterval, false, add(min, maxMinDistance, -1), add(max, maxMinDistance)).ticks
+            ticks: options.type === constants.discrete ? [] : generateTicks(tickInterval, false, add(min, maxMinDistance, -1), add(max, maxMinDistance)).ticks
         };
     },
 
