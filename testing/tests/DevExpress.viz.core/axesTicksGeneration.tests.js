@@ -1069,6 +1069,62 @@ QUnit.test("getAggregationInfo for discrete axis", function(assert) {
     assert.deepEqual(aggregationInfo.intervals, []);
 });
 
+QUnit.test("skip ckecking on getAggregationInfo", function(assert) {
+    var aggregationInfo;
+
+    this.createAxis();
+    this.updateOptions({
+        argumentType: "numeric",
+        type: "continuous",
+        aggregationInterval: 0.1
+    });
+
+    this.axis.setBusinessRange({ min: 1, max: 5, addRange: function() { } });
+    this.axis.createTicks(canvas(10));
+
+    aggregationInfo = this.axis.getAggregationInfo();
+
+    assert.strictEqual(aggregationInfo.intervals.length, 121);
+});
+
+QUnit.test("datetime getAggregationInfo", function(assert) {
+    var aggregationInfo;
+
+    this.createAxis();
+    this.updateOptions({
+        valueType: "datetime",
+        type: "continuous",
+        endOnTick: false
+    });
+
+    this.axis.setBusinessRange({ minVisible: new Date(2012, 3, 1, 12, 3, 5, 123), maxVisible: new Date(2012, 3, 1, 12, 3, 5, 149) });
+    this.axis.createTicks(canvas(300));
+    // act
+
+    aggregationInfo = this.axis.getAggregationInfo();
+
+    assert.strictEqual(aggregationInfo.intervals.length, 79);
+});
+
+QUnit.test("logarithmic getAggregationInfo", function(assert) {
+    var aggregationInfo;
+
+    this.createAxis();
+    this.updateOptions({
+        argumentType: "numeric",
+        type: "logarithmic",
+        logarithmBase: 10
+    });
+
+    this.axis.setBusinessRange({ minVisible: 0.01, maxVisible: 10, addRange: function() { } });
+    this.axis.createTicks(canvas(450));
+
+    // assert
+    aggregationInfo = this.axis.getAggregationInfo();
+
+    assert.strictEqual(aggregationInfo.intervals.length, 91);
+});
+
 QUnit.module("Numeric. Minor ticks", environment);
 
 QUnit.test("minorTick and minorGrid are not visible - do not calculate minor ticks", function(assert) {
