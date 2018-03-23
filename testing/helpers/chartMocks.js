@@ -987,8 +987,8 @@ var MockAxis = exports.MockAxis = function(renderOptions) {
         setMarginOptions: sinon.spy(),
         getAggregationInfo: function() {
             return {
-                intervalsDistance: null,
-                intervals: []
+                interval: null,
+                ticks: []
             };
         }
     };

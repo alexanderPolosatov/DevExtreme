@@ -1191,8 +1191,8 @@ Axis.prototype = {
             tickInterval = generateTicks(options.aggregationInterval, true, viewPort.minVisible, viewPort.maxVisible).tickInterval;
 
         return {
-            intervalsDistance: tickInterval,
-            intervals: that._options.type === constants.discrete ? [] : generateTicks(tickInterval, false, add(min, maxMinDistance, -1), add(max, maxMinDistance)).ticks
+            interval: tickInterval,
+            ticks: that._options.type === constants.discrete ? [] : generateTicks(tickInterval, false, add(min, maxMinDistance, -1), add(max, maxMinDistance)).ticks
         };
     },
 

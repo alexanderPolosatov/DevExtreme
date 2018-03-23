@@ -115,7 +115,7 @@ QUnit.test("T382881, Series is not sorted", function(assert) {
             { arg: 5, val: 1 }
         ];
 
-    this.argumentAxis.getAggregationInfo = () => { return { intervalsDistance: 2 }; };
+    this.argumentAxis.getAggregationInfo = () => { return { interval: 2 }; };
 
     this.series.updateData(points);
     // Act
@@ -146,7 +146,7 @@ QUnit.test("10 points -> 5 points. All points. ValueAxisType = discrete", functi
     this.series.updateDataType({
         valueAxisType: "discrete"
     });
-    this.argumentAxis.getAggregationInfo = () => { return { intervalsDistance: 2 }; };
+    this.argumentAxis.getAggregationInfo = () => { return { interval: 2 }; };
     this.series.updateData(points);
     this.series.createPoints();
 
@@ -167,7 +167,7 @@ QUnit.test("10 points -> 10 points.", function(assert) {
         },
         points = this.createFusionPoints(options, true);
 
-    this.argumentAxis.getAggregationInfo = () => { return { intervalsDistance: 1 }; };
+    this.argumentAxis.getAggregationInfo = () => { return { interval: 1 }; };
     this.series.updateData(points);
 
     this.series.createPoints();
@@ -204,7 +204,7 @@ QUnit.test("Custom aggregation", function(assert) {
     this.series.updateDataType({
         valueAxisType: "discrete"
     });
-    this.argumentAxis.getAggregationInfo = () => { return { intervalsDistance: 3 }; };
+    this.argumentAxis.getAggregationInfo = () => { return { interval: 3 }; };
     this.series.updateData(data);
     this.series.createPoints();
 
@@ -234,8 +234,8 @@ QUnit.module("Aggregation methods", {
         this.argumentAxis = {
             getAggregationInfo() {
                 return {
-                    intervalsDistance: 10,
-                    intervals: [0, 10]
+                    interval: 10,
+                    ticks: [0, 10]
                 };
             }
         };
@@ -650,7 +650,7 @@ QUnit.test("Count. Do not calculate error bars", function(assert) {
 });
 
 QUnit.test("Points grouping by intervals", function(assert) {
-    this.argumentAxis.getAggregationInfo = () => { return { intervalsDistance: 5, intervals: [0, 5, 10, 15] }; };
+    this.argumentAxis.getAggregationInfo = () => { return { interval: 5, ticks: [0, 5, 10, 15] }; };
     var points = this.aggregateData("avg", this.data);
     assert.equal(points.length, 2);
     assert.equal(points[0].argument, 0);

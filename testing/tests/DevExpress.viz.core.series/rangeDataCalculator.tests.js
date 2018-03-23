@@ -25,8 +25,8 @@ var createSeries = function(options, renderSettings, widgetType) {
         calculateInterval: function(a, b) { return Math.abs(a - b); },
         getAggregationInfo: function() {
             return {
-                intervalsDistance: 1,
-                intervals: [2, 5, 10, 20, 25]
+                interval: 1,
+                ticks: [2, 5, 10, 20, 25]
             };
         }
     };

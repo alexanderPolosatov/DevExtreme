@@ -920,9 +920,9 @@ QUnit.test("getAggregationInfo with tickInterval", function(assert) {
 
     aggregationInfo = this.axis.getAggregationInfo();
 
-    assert.strictEqual(aggregationInfo.intervalsDistance, 2);
-    assert.deepEqual(aggregationInfo.intervals[0], -8);
-    assert.deepEqual(aggregationInfo.intervals[aggregationInfo.intervals.length - 1], 20);
+    assert.strictEqual(aggregationInfo.interval, 2);
+    assert.deepEqual(aggregationInfo.ticks[0], -8);
+    assert.deepEqual(aggregationInfo.ticks[aggregationInfo.ticks.length - 1], 20);
 });
 
 QUnit.test("getAggregationInfo. Ticks was generated with endOnTick", function(assert) {
@@ -941,8 +941,8 @@ QUnit.test("getAggregationInfo. Ticks was generated with endOnTick", function(as
 
     aggregationInfo = this.axis.getAggregationInfo();
 
-    assert.deepEqual(aggregationInfo.intervals[0], -5);
-    assert.deepEqual(aggregationInfo.intervals[aggregationInfo.intervals.length - 1], 20);
+    assert.deepEqual(aggregationInfo.ticks[0], -5);
+    assert.deepEqual(aggregationInfo.ticks[aggregationInfo.ticks.length - 1], 20);
 });
 
 QUnit.test("getAggregationInfo. With divisionFactor", function(assert) {
@@ -961,9 +961,9 @@ QUnit.test("getAggregationInfo. With divisionFactor", function(assert) {
 
     aggregationInfo = this.axis.getAggregationInfo();
 
-    assert.strictEqual(aggregationInfo.intervalsDistance, 2);
-    assert.deepEqual(aggregationInfo.intervals[0], -8);
-    assert.deepEqual(aggregationInfo.intervals[aggregationInfo.intervals.length - 1], 20);
+    assert.strictEqual(aggregationInfo.interval, 2);
+    assert.deepEqual(aggregationInfo.ticks[0], -8);
+    assert.deepEqual(aggregationInfo.ticks[aggregationInfo.ticks.length - 1], 20);
 });
 
 QUnit.test("getAggregationInfo. Without divisionFactor", function(assert) {
@@ -982,9 +982,9 @@ QUnit.test("getAggregationInfo. Without divisionFactor", function(assert) {
 
     aggregationInfo = this.axis.getAggregationInfo();
 
-    assert.strictEqual(aggregationInfo.intervalsDistance, 2);
-    assert.deepEqual(aggregationInfo.intervals[0], -8);
-    assert.deepEqual(aggregationInfo.intervals[aggregationInfo.intervals.length - 1], 20);
+    assert.strictEqual(aggregationInfo.interval, 2);
+    assert.deepEqual(aggregationInfo.ticks[0], -8);
+    assert.deepEqual(aggregationInfo.ticks[aggregationInfo.ticks.length - 1], 20);
 });
 
 QUnit.test("getAggregationInfo. Default divisionFactor", function(assert) {
@@ -1002,10 +1002,10 @@ QUnit.test("getAggregationInfo. Default divisionFactor", function(assert) {
 
     aggregationInfo = this.axis.getAggregationInfo();
 
-    assert.strictEqual(aggregationInfo.intervals.length, 28);
-    assert.strictEqual(aggregationInfo.intervalsDistance, 1);
-    assert.strictEqual(aggregationInfo.intervals[0], -8);
-    assert.strictEqual(aggregationInfo.intervals[aggregationInfo.intervals.length - 1], 19);
+    assert.strictEqual(aggregationInfo.ticks.length, 28);
+    assert.strictEqual(aggregationInfo.interval, 1);
+    assert.strictEqual(aggregationInfo.ticks[0], -8);
+    assert.strictEqual(aggregationInfo.ticks[aggregationInfo.ticks.length - 1], 19);
 });
 
 QUnit.test("getAggregationInfo with zooming", function(assert) {
@@ -1023,10 +1023,10 @@ QUnit.test("getAggregationInfo with zooming", function(assert) {
 
     aggregationInfo = this.axis.getAggregationInfo();
 
-    assert.strictEqual(aggregationInfo.intervalsDistance, 0.2);
-    assert.strictEqual(aggregationInfo.intervals.length, 31);
-    assert.strictEqual(aggregationInfo.intervals[0], 1);
-    assert.strictEqual(aggregationInfo.intervals[aggregationInfo.intervals.length - 1], 7);
+    assert.strictEqual(aggregationInfo.interval, 0.2);
+    assert.strictEqual(aggregationInfo.ticks.length, 31);
+    assert.strictEqual(aggregationInfo.ticks[0], 1);
+    assert.strictEqual(aggregationInfo.ticks[aggregationInfo.ticks.length - 1], 7);
 });
 
 QUnit.test("getAggregationInfo with min/max", function(assert) {
@@ -1045,10 +1045,10 @@ QUnit.test("getAggregationInfo with min/max", function(assert) {
 
     aggregationInfo = this.axis.getAggregationInfo();
 
-    assert.strictEqual(aggregationInfo.intervalsDistance, 0.2);
-    assert.strictEqual(aggregationInfo.intervals.length, 31);
-    assert.strictEqual(aggregationInfo.intervals[0], 1);
-    assert.strictEqual(aggregationInfo.intervals[aggregationInfo.intervals.length - 1], 7);
+    assert.strictEqual(aggregationInfo.interval, 0.2);
+    assert.strictEqual(aggregationInfo.ticks.length, 31);
+    assert.strictEqual(aggregationInfo.ticks[0], 1);
+    assert.strictEqual(aggregationInfo.ticks[aggregationInfo.ticks.length - 1], 7);
 });
 
 QUnit.test("getAggregationInfo for discrete axis", function(assert) {
@@ -1065,8 +1065,8 @@ QUnit.test("getAggregationInfo for discrete axis", function(assert) {
 
     aggregationInfo = this.axis.getAggregationInfo();
 
-    assert.strictEqual(aggregationInfo.intervalsDistance, 1);
-    assert.deepEqual(aggregationInfo.intervals, []);
+    assert.strictEqual(aggregationInfo.interval, 1);
+    assert.deepEqual(aggregationInfo.ticks, []);
 });
 
 QUnit.test("skip ckecking on getAggregationInfo", function(assert) {
@@ -1084,7 +1084,7 @@ QUnit.test("skip ckecking on getAggregationInfo", function(assert) {
 
     aggregationInfo = this.axis.getAggregationInfo();
 
-    assert.strictEqual(aggregationInfo.intervals.length, 121);
+    assert.strictEqual(aggregationInfo.ticks.length, 121);
 });
 
 QUnit.test("datetime getAggregationInfo", function(assert) {
@@ -1103,7 +1103,7 @@ QUnit.test("datetime getAggregationInfo", function(assert) {
 
     aggregationInfo = this.axis.getAggregationInfo();
 
-    assert.strictEqual(aggregationInfo.intervals.length, 79);
+    assert.strictEqual(aggregationInfo.ticks.length, 79);
 });
 
 QUnit.test("logarithmic getAggregationInfo", function(assert) {
@@ -1122,7 +1122,7 @@ QUnit.test("logarithmic getAggregationInfo", function(assert) {
     // assert
     aggregationInfo = this.axis.getAggregationInfo();
 
-    assert.strictEqual(aggregationInfo.intervals.length, 91);
+    assert.strictEqual(aggregationInfo.ticks.length, 91);
 });
 
 QUnit.module("Numeric. Minor ticks", environment);
