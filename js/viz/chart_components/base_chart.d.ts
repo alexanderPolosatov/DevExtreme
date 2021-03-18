@@ -42,7 +42,70 @@ import BaseWidget, {
     BaseWidgetTooltip,
     BaseWidgetAnnotationConfig
 } from '../core/base_widget';
-
+/**
+ * @docid
+ * @publicName PointClickEvent
+ * @type object
+ * @public
+ */
+export interface PointClickEvent {
+    readonly component: BaseChart,
+    readonly element: TElement,
+    readonly model?: any,
+    /**
+     * @docid
+     * @publicName event
+     * @type event
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    readonly event: TEvent,
+    /**
+     * @docid
+     * @publicName target
+     * @type basePointObject
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    readonly target: basePointObject 
+}
+/**
+ * @docid
+ * @publicName PointInteractionEvent
+ * @type object
+ * @public
+ */
+export interface PointInteractionEvent {
+    /**
+     * @docid
+     * @publicName component
+     * @type object
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    readonly component: any,
+    /**
+     * @docid
+     * @publicName element
+     * @type object
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    readonly element: any,
+    /**
+     * @docid
+     * @publicName target
+     * @type basePointObject
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    readonly target: basePointObject
+}
+export interface DoneEvent { 
+    readonly component: T,
+    readonly element: TElement,
+    readonly model?: any 
+}
 export interface BaseChartOptions<T = BaseChart> extends BaseWidgetOptions<T> {
     /**
      * @docid
@@ -122,19 +185,26 @@ export interface BaseChartOptions<T = BaseChart> extends BaseWidgetOptions<T> {
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onDone?: ((e: { component?: T, element?: TElement, model?: any }) => any);
+    onDone?: ((e: DoneEvent) => any);
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 event:event
-     * @type_function_param1_field5 target:basePointObject
+     * @type_function_param1 e:PointClickEvent
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onPointClick?: ((e: { component?: T, element?: TElement, model?: any, event?: TEvent, target?: basePointObject }) => any) | string;
+    onPointClick?: ((e: PointClickEvent) => any) | string;
+    /**
+     * @docid
+     * @type_function_param1 e:PointInteractionEvent
+     * @notUsedInTheme
+     * @action
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    onPointHoverChanged?: ((e: PointInteractionEvent) => any);
     /**
      * @docid
      * @type_function_param1 e:object
@@ -146,19 +216,7 @@ export interface BaseChartOptions<T = BaseChart> extends BaseWidgetOptions<T> {
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onPointHoverChanged?: ((e: { component?: any, element?: any, target?: basePointObject }) => any);
-    /**
-     * @docid
-     * @type_function_param1 e:object
-     * @type_function_param1_field1 component:object
-     * @type_function_param1_field2 element:object
-     * @type_function_param1_field3 target:basePointObject
-     * @notUsedInTheme
-     * @action
-     * @prevFileNamespace DevExpress.viz
-     * @public
-     */
-    onPointSelectionChanged?: ((e: { component?: any, element?: any, target?: basePointObject }) => any);
+    onPointSelectionChanged?: ((e: PointInteractionEvent) => any);
     /**
      * @docid
      * @extends Action

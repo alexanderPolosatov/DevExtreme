@@ -45,6 +45,41 @@ import {
 
 export type PieSeriesType = 'donut' | 'doughnut' | 'pie';
 export type SegmentsDirectionType = 'anticlockwise' | 'clockwise';
+/**
+ * @docid
+ * @publicName LegendClickEvent
+ * @type object
+ * @public
+ */
+export interface LegendClickEvent { 
+  readonly component: dxPieChart,
+  readonly element: TElement,
+  readonly model?: any,
+  /**
+   * @docid
+   * @publicName event
+   * @type event
+   * @prevFileNamespace DevExpress.viz
+   * @public
+   */
+  readonly event: TEvent,
+  /**
+   * @docid
+   * @publicName target
+   * @type string | number
+   * @prevFileNamespace DevExpress.viz
+   * @public
+   */
+  readonly target: string | number,
+  /**
+   * @docid
+   * @publicName points
+   * @type Array<piePointObject>
+   * @prevFileNamespace DevExpress.viz
+   * @public
+   */
+  readonly points: Array<piePointObject>
+}
 
 /**
 * @docid
@@ -159,16 +194,13 @@ export interface dxPieChartOptions extends BaseChartOptions<dxPieChart> {
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 event:event
-     * @type_function_param1_field5 target:String|Number
-     * @type_function_param1_field6 points:Array<piePointObject>
+     * @type_function_param1 e:LegendClickEvent
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onLegendClick?: ((e: { component?: dxPieChart, element?: TElement, model?: any, event?: TEvent, target?: string | number, points?: Array<piePointObject> }) => any) | string;
+    onLegendClick?: ((e: LegendClickEvent) => any) | string;
     /**
      * @docid
      * @extends CommonVizPalette

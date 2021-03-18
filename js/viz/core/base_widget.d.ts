@@ -24,6 +24,11 @@ import {
 
 export type WordWrapType = 'normal' | 'breakWord' | 'none';
 export type VizTextOverflowType = 'ellipsis' | 'hide' | 'none';
+export interface DrawnEvent {
+  readonly component: T,
+  readonly element: TElement,
+  readonly model?: any
+}
 
 export interface BaseWidgetOptions<T = BaseWidget> extends DOMComponentOptions<T> {
     /**
@@ -70,7 +75,7 @@ export interface BaseWidgetOptions<T = BaseWidget> extends DOMComponentOptions<T
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onDrawn?: ((e: { component?: T, element?: TElement, model?: any }) => any);
+    onDrawn?: ((e: DrawnEvent) => any);
     /**
      * @docid
      * @extends Action

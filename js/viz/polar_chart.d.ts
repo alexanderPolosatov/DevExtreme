@@ -42,6 +42,60 @@ import {
 } from './core/base_widget';
 
 export type PolarChartSeriesType = 'area' | 'bar' | 'line' | 'scatter' | 'stackedbar';
+/**
+ * @docid
+ * @publicName LegendClickEvent
+ * @type object
+ * @public
+ */
+export interface LegendClickEvent {
+    readonly component: dxPolarChart,
+    readonly element: TElement,
+    readonly model?: any,
+    /**
+     * @docid
+     * @publicName event
+     * @type event
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    readonly event: TEvent,
+    /**
+     * @docid
+     * @publicName target
+     * @type polarChartSeriesObject
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    readonly target: polarChartSeriesObject
+}
+/**
+ * @docid
+ * @publicName SeriesClickEvent
+ * @type object
+ * @public
+ */
+export interface SeriesClickEvent {
+    readonly component: dxPolarChart,
+    readonly element: TElement,
+    readonly model?: any,
+    /**
+     * @docid
+     * @publicName event
+     * @type event
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    readonly event: TEvent,
+    /**
+     * @docid
+     * @publicName target
+     * @type polarChartSeriesObject
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    readonly target: polarChartSeriesObject
+}
 
 /**
  * @docid
@@ -214,27 +268,23 @@ export interface dxPolarChartOptions extends BaseChartOptions<dxPolarChart> {
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 event:event
-     * @type_function_param1_field5 target:polarChartSeriesObject
+     * @type_function_param1 e:LegendClickEvent
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onLegendClick?: ((e: { component?: dxPolarChart, element?: TElement, model?: any, event?: TEvent, target?: polarChartSeriesObject }) => any) | string;
+    onLegendClick?: ((e: LegendClickEvent) => any) | string;
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 event:event
-     * @type_function_param1_field5 target:polarChartSeriesObject
+     * @type_function_param1 e:SeriesClickEvent
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onSeriesClick?: ((e: { component?: dxPolarChart, element?: TElement, model?: any, event?: TEvent, target?: polarChartSeriesObject }) => any) | string;
+    onSeriesClick?: ((e: SeriesClickEvent) => any) | string;
     /**
      * @docid
      * @extends Action

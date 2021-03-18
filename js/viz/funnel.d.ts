@@ -51,6 +51,33 @@ export interface FunnelLegendItem extends BaseLegendItem {
      */
     item?: dxFunnelItem;
 }
+/**
+ * @docid
+ * @publicName LegendClickEvent
+ * @type object
+ * @public
+ */
+export interface LegendClickEvent { 
+  readonly component: dxFunnel,
+  readonly element: TElement,
+  readonly model?: any,
+  /**
+   * @docid
+   * @publicName event
+   * @type event
+   * @prevFileNamespace DevExpress.viz
+   * @public
+   */
+  readonly event: TEvent,
+  /**
+   * @docid
+   * @publicName item
+   * @type dxFunnelItem
+   * @prevFileNamespace DevExpress.viz
+   * @public
+   */
+  readonly item: dxFunnelItem
+}
 
 export interface dxFunnelOptions extends BaseWidgetOptions<dxFunnel> {
     /**
@@ -466,15 +493,13 @@ export interface dxFunnelOptions extends BaseWidgetOptions<dxFunnel> {
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 event:event
-     * @type_function_param1_field5 item:dxFunnelItem
+     * @type_function_param1 e:LegendClickEvent
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onLegendClick?: ((e: { component?: dxFunnel, element?: TElement, model?: any, event?: TEvent, item?: dxFunnelItem }) => any) | string;
+    onLegendClick?: ((e: LegendClickEvent) => any) | string;
     /**
      * @docid
      * @extends Action

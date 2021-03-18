@@ -39,6 +39,88 @@ import {
 } from './core/base_widget';
 
 export type ChartSingleValueSeriesAggregationMethodType = 'avg' | 'count' | 'max' | 'min' | 'sum' | 'custom';
+/**
+ * @docid
+ * @type object
+ * @publicName ArgumentAxisClickEvent
+ * @public
+ */
+export interface ArgumentAxisClickEvent { 
+    readonly component: dxChart, 
+    readonly element: TElement,
+    readonly model?: any,
+    /**
+     * @docid
+     * @publicName event
+     * @type event
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    readonly event: TEvent,
+    /**
+     * @docid
+     * @publicName argument
+     * @type Date|Number|string
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    readonly argument: Date | number | string
+}
+
+/**
+ * @docid
+ * @type object
+ * @publicName LegendClickEvent
+ * @public
+ */
+export interface LegendClickEvent { 
+    readonly component: dxChart,
+    readonly element: TElement,
+    readonly model?: any,
+    /**
+     * @docid
+     * @publicName event
+     * @type event
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    readonly event: TEvent,
+    /**
+     * @docid
+     * @publicName target
+     * @type chartSeriesObject
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    readonly target: chartSeriesObject
+ }
+ /**
+  * @docid
+  * @publicName SeriesClickEvent
+  * @type object
+  * @public
+  */
+ export interface SeriesClickEvent {
+    readonly component: dxChart,
+    readonly element: TElement,
+    readonly model?: any,
+    /**
+     * @docid
+     * @publicName event
+     * @type event
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    readonly event: TEvent,
+    /**
+     * @docid
+     * @publicName target
+     * @type chartSeriesObject
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    readonly target: chartSeriesObject
+}
 
 /**
 * @docid
@@ -928,39 +1010,33 @@ export interface dxChartOptions extends BaseChartOptions<dxChart> {
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 event:event
-     * @type_function_param1_field5 argument:Date|Number|string
+     * @type_function_param1 e:ArgumentAxisClickEvent
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onArgumentAxisClick?: ((e: { component?: dxChart, element?: TElement, model?: any, event?: TEvent, argument?: Date | number | string }) => any) | string;
+    onArgumentAxisClick?: ((e: ArgumentAxisClickEvent) => any) | string;
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 event:event
-     * @type_function_param1_field5 target:chartSeriesObject
+     * @type_function_param1 e:LegendClickEvent
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onLegendClick?: ((e: { component?: dxChart, element?: TElement, model?: any, event?: TEvent, target?: chartSeriesObject }) => any) | string;
+    onLegendClick?: ((e: LegendClickEvent) => any) | string;
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 event:event
-     * @type_function_param1_field5 target:chartSeriesObject
+     * @type_function_param1 e:SeriesClickEvent
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onSeriesClick?: ((e: { component?: dxChart, element?: TElement, model?: any, event?: TEvent, target?: chartSeriesObject }) => any) | string;
+    onSeriesClick?: ((e: SeriesClickEvent) => any) | string;
     /**
      * @docid
      * @extends Action
