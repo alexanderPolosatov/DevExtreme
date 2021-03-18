@@ -95,6 +95,25 @@ export interface MapLayer {
 
 /**
  * @docid
+ * @type object
+ * @publicName TooltipEvent
+ * @public
+ */
+export interface TooltipEvent {
+    component?: dxVectorMap,
+    element?: TElement,
+    model?: any,
+    /**
+     * @docid
+     * @publicName target
+     * @type MapLayerElement | dxVectorMapAnnotationConfig
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    target?: MapLayerElement | dxVectorMapAnnotationConfig
+}
+/**
+ * @docid
  * @publicName Layer Element
  */
 export interface MapLayerElement {
@@ -541,25 +560,23 @@ export interface dxVectorMapOptions extends BaseWidgetOptions<dxVectorMap> {
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 target:MapLayerElement | dxVectorMapAnnotationConfig
+     * @type_function_param1 e:TooltipEvent
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onTooltipHidden?: ((e: { component?: dxVectorMap, element?: TElement, model?: any, target?: MapLayerElement | dxVectorMapAnnotationConfig | any }) => any);
+    onTooltipHidden?: ((e: TooltipEvent) => any);
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 target:MapLayerElement | dxVectorMapAnnotationConfig
+     * @type_function_param1 e:TooltipEvent
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onTooltipShown?: ((e: { component?: dxVectorMap, element?: TElement, model?: any, target?: MapLayerElement | dxVectorMapAnnotationConfig | any }) => any);
+    onTooltipShown?: ((e: TooltipEvent) => any);
     /**
      * @docid
      * @extends Action

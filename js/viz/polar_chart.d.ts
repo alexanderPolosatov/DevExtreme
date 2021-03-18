@@ -44,6 +44,25 @@ import {
 export type PolarChartSeriesType = 'area' | 'bar' | 'line' | 'scatter' | 'stackedbar';
 /**
  * @docid
+ * @type object
+ * @publicName SeriesInteractionEvent
+ * @public
+ */
+ export interface SeriesInteractionEvent {
+    component: dxPolarChart,
+    element: TElement,
+    model?: any,
+    /**
+     * @docid
+     * @publicName target
+     * @type polarChartSeriesObject
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    target: polarChartSeriesObject
+ }
+/**
+ * @docid
  * @publicName LegendClickEvent
  * @type object
  * @public
@@ -288,25 +307,23 @@ export interface dxPolarChartOptions extends BaseChartOptions<dxPolarChart> {
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 target:polarChartSeriesObject
+     * @type_function_param1 e:SeriesInteractionEvent
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onSeriesHoverChanged?: ((e: { component?: dxPolarChart, element?: TElement, model?: any, target?: polarChartSeriesObject }) => any);
+    onSeriesHoverChanged?: ((e: SeriesInteractionEvent) => any);
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 target:polarChartSeriesObject
+     * @type_function_param1 e:SeriesInteractionEvent
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onSeriesSelectionChanged?: ((e: { component?: dxPolarChart, element?: TElement, model?: any, target?: polarChartSeriesObject }) => any);
+    onSeriesSelectionChanged?: ((e: SeriesInteractionEvent) => any);
     /**
      * @docid
      * @extends Action

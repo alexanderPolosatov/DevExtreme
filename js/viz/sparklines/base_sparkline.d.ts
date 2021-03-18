@@ -13,7 +13,11 @@ import BaseWidget, {
     BaseWidgetTitle,
     BaseWidgetTooltip
 } from '../core/base_widget';
-
+export interface TooltipEvent {
+    component: T,
+    element: TElement,
+    model?: any
+}
 export interface BaseSparklineOptions<T = BaseSparkline> extends BaseWidgetOptions<T> {
     /**
      * @docid
@@ -32,21 +36,23 @@ export interface BaseSparklineOptions<T = BaseSparkline> extends BaseWidgetOptio
     /**
      * @docid
      * @extends Action
+     * @type_function_param1 e:TooltipEvent 
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onTooltipHidden?: ((e: { component?: T, element?: TElement, model?: any }) => any);
+    onTooltipHidden?: ((e: TooltipEvent) => any);
     /**
      * @docid
      * @extends Action
+     * @type_function_param1 e:TooltipEvent 
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onTooltipShown?: ((e: { component?: T, element?: TElement, model?: any }) => any);
+    onTooltipShown?: ((e: TooltipEvent) => any);
     /**
      * @docid
      * @prevFileNamespace DevExpress.viz

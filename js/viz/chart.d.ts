@@ -66,7 +66,25 @@ export interface ArgumentAxisClickEvent {
      */
     readonly argument: Date | number | string
 }
-
+/**
+ * @docid
+ * @type object
+ * @publicName SeriesInteractionEvent
+ * @public
+ */
+export interface SeriesInteractionEvent {
+    component: dxChart,
+    element: TElement,
+    model?: any,
+    /**
+     * @docid
+     * @publicName target
+     * @type chartSeriesObject
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    target: chartSeriesObject
+ }
 /**
  * @docid
  * @type object
@@ -1040,25 +1058,23 @@ export interface dxChartOptions extends BaseChartOptions<dxChart> {
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 target:chartSeriesObject
+     * @type_function_param1 e:SeriesInteractionEvent
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onSeriesHoverChanged?: ((e: { component?: dxChart, element?: TElement, model?: any, target?: chartSeriesObject }) => any);
+    onSeriesHoverChanged?: ((e: SeriesInteractionEvent) => any);
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 target:chartSeriesObject
+     * @type_function_param1 e:SeriesInteractionEvent
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onSeriesSelectionChanged?: ((e: { component?: dxChart, element?: TElement, model?: any, target?: chartSeriesObject }) => any);
+    onSeriesSelectionChanged?: ((e: SeriesInteractionEvent) => any);
     /**
      * @docid
      * @extends Action

@@ -71,6 +71,25 @@ export interface PointClickEvent {
 }
 /**
  * @docid
+ * @type object
+ * @publicName TooltipEvent
+ * @public
+ */
+export interface TooltipEvent {
+    component?: T,
+    element?: TElement,
+    model?: any,
+    /**
+     * @docid
+     * @publicName target
+     * @type basePointObject|dxChartAnnotationConfig|any
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    target?: basePointObject | dxChartAnnotationConfig | any
+}
+/**
+ * @docid
  * @publicName PointInteractionEvent
  * @type object
  * @public
@@ -220,25 +239,23 @@ export interface BaseChartOptions<T = BaseChart> extends BaseWidgetOptions<T> {
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 target:basePointObject|dxChartAnnotationConfig|any
+     * @type_function_param1 e:TooltipEvent
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onTooltipHidden?: ((e: { component?: T, element?: TElement, model?: any, target?: basePointObject | dxChartAnnotationConfig | any }) => any);
+    onTooltipHidden?: ((e: TooltipEvent) => any);
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 target:basePointObject|dxChartAnnotationConfig|any
+     * @type_function_param1 e:TooltipEvent
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onTooltipShown?: ((e: { component?: T, element?: TElement, model?: any, target?: basePointObject | dxChartAnnotationConfig | any }) => any);
+    onTooltipShown?: ((e: TooltipEvent) => any);
     /**
      * @docid
      * @extends CommonVizPalette

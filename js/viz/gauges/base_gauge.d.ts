@@ -21,6 +21,25 @@ import BaseWidget, {
     BaseWidgetTooltip,
     Font
 } from '../core/base_widget';
+/**
+ * @docid
+ * @type object
+ * @publicName TooltipEvent
+ * @public
+ */
+export interface TooltipEvent {
+    component: T,
+    element: TElement,
+    model?: any,
+    /**
+     * @docid
+     * @publicName target
+     * @type object
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    target: any
+}
 
 export interface BaseGaugeOptions<T = BaseGauge> extends BaseWidgetOptions<T> {
     /**
@@ -47,25 +66,23 @@ export interface BaseGaugeOptions<T = BaseGauge> extends BaseWidgetOptions<T> {
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 target:object
+     * @type_function_param1 e:TooltipEvent
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onTooltipHidden?: ((e: { component?: T, element?: TElement, model?: any, target?: any }) => any);
+    onTooltipHidden?: ((e: TooltipEvent) => any);
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 target:object
+     * @type_function_param1 e:TooltipEvent
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onTooltipShown?: ((e: { component?: T, element?: TElement, model?: any, target?: any }) => any);
+    onTooltipShown?: ((e: TooltipEvent) => any);
     /**
      * @docid
      * @type object
