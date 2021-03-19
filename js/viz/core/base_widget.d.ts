@@ -29,7 +29,107 @@ export interface DrawnEvent {
   readonly element: TElement,
   readonly model?: any
 }
-
+/**
+ * @docid
+ * @type object
+ * @publicName IncidentOccurredEvent
+ * @public
+ */
+export interface IncidentOccurredEvent<T> {
+  readonly component: T,
+  readonly element: TElement,
+  readonly model?: any,
+  /**
+   * @docid
+   * @publicName target
+   * @type any
+   * @prevFileNamespace DevExpress.viz
+   * @public
+   */
+  readonly target: any
+}
+export interface ExportedEvent<T> {
+  readonly component: T,
+  readonly element: TElement,
+  readonly model?: any
+}
+/**
+ * @docid
+ * @type object
+ * @publicName ExportingEvent
+ * @public
+ */
+export interface ExportingEvent<T> {
+  readonly component: T,
+  readonly element: TElement,
+  readonly model?: any,
+  /**
+   * @docid
+   * @publicName fileName
+   * @type string
+   * @prevFileNamespace DevExpress.viz
+   * @public
+   */
+  readonly fileName: string,
+  /**
+   * @docid
+   * @publicName cancel
+   * @type boolean
+   * @prevFileNamespace DevExpress.viz
+   * @public
+   */
+  readonly cancel?: boolean,
+  /**
+   * @docid
+   * @publicName format
+   * @type string
+   * @prevFileNamespace DevExpress.viz
+   * @public
+   */
+  readonly format: string
+}
+/**
+ * @docid
+ * @type object
+ * @publicName FileSavingEvent
+ * @public
+ */
+export interface FileSavingEvent<T> { 
+  readonly component: T, 
+  readonly element: TElement,
+  /**
+   * @docid
+   * @publicName fileName
+   * @type string
+   * @prevFileNamespace DevExpress.viz
+   * @public
+   */
+  readonly fileName: string,
+  /**
+   * @docid
+   * @publicName format
+   * @type string
+   * @prevFileNamespace DevExpress.viz
+   * @public
+   */
+  readonly format: string,
+  /**
+   * @docid
+   * @publicName data
+   * @type BLOB
+   * @prevFileNamespace DevExpress.viz
+   * @public
+   */
+  readonly data: Blob,
+  /**
+   * @docid
+   * @publicName cancel
+   * @type boolean
+   * @prevFileNamespace DevExpress.viz
+   * @public
+   */
+  readonly cancel?: boolean 
+}
 export interface BaseWidgetOptions<T = BaseWidget> extends DOMComponentOptions<T> {
     /**
      * @docid
@@ -83,42 +183,34 @@ export interface BaseWidgetOptions<T = BaseWidget> extends DOMComponentOptions<T
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onExported?: ((e: { component?: T, element?: TElement, model?: any }) => any);
+    onExported?: ((e: ExportedEvent<T>) => any);
     /**
      * @docid
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 fileName:string
-     * @type_function_param1_field5 cancel:boolean
-     * @type_function_param1_field6 format:string
+     * @type_function_param1 e:ExportingEvent
      * @extends Action
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onExporting?: ((e: { component?: T, element?: TElement, model?: any, fileName?: string, cancel?: boolean, format?: string }) => any);
+    onExporting?: ((e: ExportingEvent<T>) => any);
     /**
      * @docid
-     * @type_function_param1 e:object
-     * @type_function_param1_field3 fileName:string
-     * @type_function_param1_field4 format:string
-     * @type_function_param1_field5 data:BLOB
-     * @type_function_param1_field6 cancel:boolean
+     * @type_function_param1 e:FileSavingEvent
      * @extends Action
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onFileSaving?: ((e: { component?: T, element?: TElement, fileName?: string, format?: string, data?: Blob, cancel?: boolean }) => any);
+    onFileSaving?: ((e: FileSavingEvent<T>) => any);
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 target:any
+     * @type_function_param1 e:IncidentOccurredEvent
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onIncidentOccurred?: ((e: { component?: T, element?: TElement, model?: any, target?: any }) => any);
+    onIncidentOccurred?: ((e: IncidentOccurredEvent<T>) => any);
     /**
      * @docid
      * @default false

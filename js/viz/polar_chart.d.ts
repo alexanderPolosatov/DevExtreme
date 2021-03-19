@@ -115,6 +115,132 @@ export interface SeriesClickEvent {
      */
     readonly target: polarChartSeriesObject
 }
+/**
+ * @docid
+ * @type object
+ * @publicName ZoomEndEvent
+ * @public
+ */
+export interface ZoomEndEvent {
+    readonly component: dxPolarChart,
+    readonly element: TElement,
+    readonly model?: any,
+    /**
+     * @docid
+     * @publicName event
+     * @type event
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    readonly event: TEvent,
+    /**
+     * @docid
+     * @publicName axis
+     * @type chartAxisObject
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    readonly axis: chartAxisObject,
+    /**
+     * @docid
+     * @publicName range
+     * @type VizRange
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    readonly range: VizRange,
+    /**
+     * @docid
+     * @publicName previousRange
+     * @type VizRange
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    readonly previousRange: VizRange,
+    /**
+     * @docid
+     * @publicName cancel
+     * @type boolean
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    cancel?: boolean,
+    /**
+     * @docid
+     * @publicName actionType
+     * @type Enums.ChartZoomPanActionType
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    readonly actionType: 'zoom' | 'pan',
+    /**
+     * @docid
+     * @publicName zoomFactor
+     * @type number
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    readonly zoomFactor: number,
+    /**
+     * @docid
+     * @publicName shift
+     * @type number
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    readonly shift: number
+}
+/**
+ * @docid
+ * @type object
+ * @publicName ZoomStartEvent
+ * @public
+ */
+export interface ZoomStartEvent {
+    readonly component: dxPolarChart,
+    readonly element: TElement,
+    readonly model: any,
+    /**
+     * @docid
+     * @publicName event
+     * @type event
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    readonly event: TEvent,
+    /**
+     * @docid
+     * @publicName axis
+     * @type chartAxisObject
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    readonly axis: chartAxisObject,
+    /**
+     * @docid
+     * @publicName range
+     * @type VizRange
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    readonly range: VizRange,
+    /**
+     * @docid
+     * @publicName cancel
+     * @type boolean
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    cancel?: boolean,
+    /**
+     * @docid
+     * @publicName actionType
+     * @type Enums.ChartZoomPanActionType
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    readonly actionType: 'zoom' | 'pan'
+}
 
 /**
  * @docid
@@ -327,36 +453,23 @@ export interface dxPolarChartOptions extends BaseChartOptions<dxPolarChart> {
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 event:event
-     * @type_function_param1_field5 axis:chartAxisObject
-     * @type_function_param1_field6 range:VizRange
-     * @type_function_param1_field7 previousRange:VizRange
-     * @type_function_param1_field8 cancel:boolean
-     * @type_function_param1_field9 actionType:Enums.ChartZoomPanActionType
-     * @type_function_param1_field10 zoomFactor:Number
-     * @type_function_param1_field11 shift:Number
+     * @type_function_param1 e:ZoomEndEvent
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onZoomEnd?: ((e: { component?: dxPolarChart, element?: TElement, model?: any, event?: TEvent, axis?: chartAxisObject, range?: VizRange, previousRange?: VizRange, cancel?: boolean, actionType?: 'zoom' | 'pan', zoomFactor?: number, shift?: number }) => any);
+    onZoomEnd?: ((e: ZoomEndEvent) => any);
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 event:event
-     * @type_function_param1_field5 axis:chartAxisObject
-     * @type_function_param1_field6 range:VizRange
-     * @type_function_param1_field7 cancel:boolean
-     * @type_function_param1_field8 actionType:Enums.ChartZoomPanActionType
+     * @type_function_param1 e:ZoomStartEvent
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onZoomStart?: ((e: { component?: dxPolarChart, element?: TElement, model?: any, event?: TEvent, axis?: chartAxisObject, range?: VizRange, cancel?: boolean, actionType?: 'zoom' | 'pan' }) => any);
+    onZoomStart?: ((e: ZoomStartEvent) => any);
     /**
      * @docid
      * @type Enums.PolarChartResolveLabelOverlapping
