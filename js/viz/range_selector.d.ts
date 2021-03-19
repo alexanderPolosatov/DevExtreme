@@ -35,7 +35,41 @@ import BaseWidget, {
     BaseWidgetTooltip,
     Font
 } from './core/base_widget';
-
+/**
+ * @docid
+ * @publicName ValueEvent
+ * @type object
+ * @public
+ */
+export interface ValueEvent {
+  readonly component: dxRangeSelector,
+  readonly element: TElement,
+  readonly model?: any,
+  /**
+   * @docid
+   * @publicName value
+   * @type Array<number,string,Date>
+   * @prevFileNamespace DevExpress.viz
+   * @public
+   */
+  readonly value: Array<number | string | Date>,
+  /**
+   * @docid
+   * @publicName previousValue
+   * @type Array<number,string,Date>
+   * @prevFileNamespace DevExpress.viz
+   * @public
+   */
+  readonly previousValue: Array<number | string | Date>,
+  /**
+   * @docid
+   * @publicName event
+   * @type event
+   * @prevFileNamespace DevExpress.viz
+   * @public
+   */
+  readonly event: TEvent
+}
 export interface dxRangeSelectorOptions extends BaseWidgetOptions<dxRangeSelector> {
     /**
      * @docid
@@ -340,17 +374,14 @@ export interface dxRangeSelectorOptions extends BaseWidgetOptions<dxRangeSelecto
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 value:Array<number,string,Date>
-     * @type_function_param1_field5 previousValue:Array<number,string,Date>
-     * @type_function_param1_field6 event:event
+     * @type_function_param1 e:ValueEvent
      * @default null
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onValueChanged?: ((e: { component?: dxRangeSelector, element?: TElement, model?: any, value?: Array<number | string | Date>, previousValue?: Array<number | string | Date>, event?: TEvent }) => any);
+    onValueChanged?: ((e: ValueEvent) => any);
     /**
      * @docid
      * @prevFileNamespace DevExpress.viz

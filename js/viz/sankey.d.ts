@@ -26,7 +26,98 @@ import BaseWidget, {
 } from './core/base_widget';
 
 import { HatchingDirectionType } from './common';
-
+/**
+ * @docid
+ * @publicName LinkClickEvent
+ * @type object
+ * @public
+ */
+export interface LinkClickEvent {
+  readonly component: dxSankey,
+  readonly element: TElement,
+  readonly model?: any,
+  /**
+   * @docid
+   * @publicName event
+   * @type event
+   * @prevFileNamespace DevExpress.viz
+   * @public
+   */
+  readonly event: TEvent,
+  /**
+   * @docid
+   * @publicName target
+   * @type dxSankeyLink
+   * @prevFileNamespace DevExpress.viz
+   * @public
+   */
+  readonly target: dxSankeyLink
+}
+/**
+ * @docid
+ * @publicName LinkHoverEvent
+ * @type object
+ * @public
+ */
+export interface LinkHoverEvent {
+  readonly component: dxSankey,
+  readonly element: TElement,
+  readonly model?: any,
+  /**
+   * @docid
+   * @publicName target
+   * @type dxSankeyLink
+   * @prevFileNamespace DevExpress.viz
+   * @public
+   */
+  readonly target: dxSankeyLink
+}
+/**
+ * @docid
+ * @publicName NodeClickEvent
+ * @type object
+ * @public
+ */
+export interface NodeClickEvent {
+  readonly component: dxSankey,
+  readonly element: TElement,
+  readonly model?: any,
+  /**
+   * @docid
+   * @publicName event
+   * @type event
+   * @prevFileNamespace DevExpress.viz
+   * @public
+   */
+  readonly event: TEvent,
+  /**
+   * @docid
+   * @publicName target
+   * @type dxSankeyNode
+   * @prevFileNamespace DevExpress.viz
+   * @public
+   */
+  readonly target: dxSankeyNode
+}
+/**
+ * @docid
+ * @publicName NodeHoverEvent
+ * @type object
+ * @public
+ */
+export interface NodeHoverEvent {
+  readonly component: dxSankey,
+  readonly element: TElement,
+  readonly model?: any,
+  /**
+   * @docid
+   * @publicName target
+   * @type dxSankeyNode
+   * @prevFileNamespace DevExpress.viz
+   * @public
+   */
+  readonly target: dxSankeyNode
+}
 export interface dxSankeyOptions extends BaseWidgetOptions<dxSankey> {
     /**
      * @docid
@@ -441,49 +532,43 @@ export interface dxSankeyOptions extends BaseWidgetOptions<dxSankey> {
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 event:event
-     * @type_function_param1_field5 target:dxSankeyLink
+     * @type_function_param1 e:LinkClickEvent
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onLinkClick?: ((e: { component?: dxSankey, element?: TElement, model?: any, event?: TEvent, target?: dxSankeyLink }) => any) | string;
+    onLinkClick?: ((e: LinkClickEvent) => any) | string;
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 target:dxSankeyLink
+     * @type_function_param1 e:LinkHoverEvent
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onLinkHoverChanged?: ((e: { component?: dxSankey, element?: TElement, model?: any, target?: dxSankeyLink }) => any);
+    onLinkHoverChanged?: ((e: LinkHoverEvent) => any);
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 event:event
-     * @type_function_param1_field5 target:dxSankeyNode
+     * @type_function_param1 e:NodeClickEvent
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onNodeClick?: ((e: { component?: dxSankey, element?: TElement, model?: any, event?: TEvent, target?: dxSankeyNode }) => any) | string;
+    onNodeClick?: ((e: NodeClickEvent) => any) | string;
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 target:dxSankeyNode
+     * @type_function_param1 e:NodeHoverEvent
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onNodeHoverChanged?: ((e: { component?: dxSankey, element?: TElement, model?: any, target?: dxSankeyNode }) => any);
+    onNodeHoverChanged?: ((e: NodeHoverEvent) => any);
     /**
      * @docid
      * @extends CommonVizPalette

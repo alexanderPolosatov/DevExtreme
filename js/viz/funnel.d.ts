@@ -78,6 +78,52 @@ export interface LegendClickEvent {
    */
   readonly item: dxFunnelItem
 }
+/**
+ * @docid
+ * @publicName ItemClickEvent
+ * @type object
+ * @public
+ */
+export interface ItemClickEvent {
+  readonly component: dxFunnel,
+  readonly element: TElement,
+  readonly model?: any,
+  /**
+   * @docid
+   * @publicName event
+   * @type event
+   * @prevFileNamespace DevExpress.viz
+   * @public
+   */
+  readonly event: TEvent,
+  /**
+   * @docid
+   * @publicName item
+   * @type dxFunnelItem
+   * @prevFileNamespace DevExpress.viz
+   * @public
+   */
+  readonly item: dxFunnelItem
+}
+/**
+ * @docid
+ * @publicName InteractiveEvent
+ * @type object
+ * @public
+ */
+export interface InteractiveEvent {
+  readonly component: dxFunnel,
+  readonly element: TElement,
+  readonly model?: any,
+  /**
+   * @docid
+   * @publicName item
+   * @type dxFunnelItem
+   * @prevFileNamespace DevExpress.viz
+   * @public
+   */
+  readonly item: dxFunnelItem
+}
 
 export interface dxFunnelOptions extends BaseWidgetOptions<dxFunnel> {
     /**
@@ -470,26 +516,23 @@ export interface dxFunnelOptions extends BaseWidgetOptions<dxFunnel> {
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 item:dxFunnelItem
+     * @type_function_param1 e:InteractiveEvent
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onHoverChanged?: ((e: { component?: dxFunnel, element?: TElement, model?: any, item?: dxFunnelItem }) => any);
+    onHoverChanged?: ((e: InteractiveEvent) => any);
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 event:event
-     * @type_function_param1_field5 item:dxFunnelItem
+     * @type_function_param1 e:ItemClickEvent
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onItemClick?: ((e: { component?: dxFunnel, element?: TElement, model?: any, event?: TEvent, item?: dxFunnelItem }) => any) | string;
+    onItemClick?: ((e: ItemClickEvent) => any) | string;
     /**
      * @docid
      * @extends Action
@@ -503,14 +546,13 @@ export interface dxFunnelOptions extends BaseWidgetOptions<dxFunnel> {
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 item:dxFunnelItem
+     * @type_function_param1 e:InteractiveEvent
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onSelectionChanged?: ((e: { component?: dxFunnel, element?: TElement, model?: any, item?: dxFunnelItem }) => any);
+    onSelectionChanged?: ((e: InteractiveEvent) => any);
     /**
      * @docid
      * @extends CommonVizPalette

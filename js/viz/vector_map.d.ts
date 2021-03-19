@@ -41,6 +41,90 @@ import {
 
 /**
  * @docid
+ * @publicName CenterChangedEvent
+ * @type object
+ * @public
+ */
+export interface CenterChangedEvent {
+    readonly component: dxVectorMap,
+    readonly element: TElement,
+    readonly model?: any,
+    /**
+     * @docid
+     * @publicName center
+     * @type Array<number>
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    readonly center: Array<number>
+}
+/**
+ * @docid
+ * @publicName ClickEvent
+ * @type object
+ * @public
+ */
+export interface ClickEvent {
+    readonly component: dxVectorMap,
+    readonly element: TElement,
+    readonly model?: any,
+    /**
+     * @docid
+     * @publicName event
+     * @type event
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    readonly event: TEvent,
+    /**
+     * @docid
+     * @publicName target
+     * @type MapLayerElement
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    readonly target: MapLayerElement
+}
+/**
+ * @docid
+ * @publicName ZoomChangedEvent
+ * @type object
+ * @public
+ */
+export interface ZoomChangedEvent {
+    readonly component: dxVectorMap,
+    readonly element: TElement,
+    readonly model?: any,
+    /**
+     * @docid
+     * @publicName target
+     * @type MapLayerElement
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    readonly target: MapLayerElement
+}
+/**
+ * @docid
+ * @publicName ZoomFactorChangedEvent
+ * @type object
+ * @public
+ */
+export interface ZoomFactorChangedEvent {
+    readonly component: dxVectorMap,
+    readonly element: TElement,
+    readonly model?: any,
+    /**
+     * @docid
+     * @publicName zoomFactor
+     * @type number
+     * @prevFileNamespace DevExpress.viz
+     * @public
+     */
+    readonly zoomFactor: number
+}
+/**
+ * @docid
  * @publicName Layer
  */
 export interface MapLayer {
@@ -526,37 +610,33 @@ export interface dxVectorMapOptions extends BaseWidgetOptions<dxVectorMap> {
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 center:Array<number>
+     * @type_function_param1 e:CenterChangedEvent
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onCenterChanged?: ((e: { component?: dxVectorMap, element?: TElement, model?: any, center?: Array<number> }) => any);
+    onCenterChanged?: ((e: CenterChangedEvent) => any);
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 event:event
-     * @type_function_param1_field5 target:MapLayerElement
+     * @type_function_param1 e:ClickEvent
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onClick?: ((e: { component?: dxVectorMap, element?: TElement, model?: any, event?: TEvent, target?: MapLayerElement }) => any) | string;
+    onClick?: ((e: ClickEvent) => any) | string;
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 target:MapLayerElement
+     * @type_function_param1 e:ZoomChangedEvent
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onSelectionChanged?: ((e: { component?: dxVectorMap, element?: TElement, model?: any, target?: MapLayerElement }) => any);
+    onSelectionChanged?: ((e: ZoomChangedEvent) => any);
     /**
      * @docid
      * @extends Action
@@ -580,14 +660,13 @@ export interface dxVectorMapOptions extends BaseWidgetOptions<dxVectorMap> {
     /**
      * @docid
      * @extends Action
-     * @type_function_param1 e:object
-     * @type_function_param1_field4 zoomFactor:number
+     * @type_function_param1 e:ZoomFactorChangedEvent
      * @notUsedInTheme
      * @action
      * @prevFileNamespace DevExpress.viz
      * @public
      */
-    onZoomFactorChanged?: ((e: { component?: dxVectorMap, element?: TElement, model?: any, zoomFactor?: number }) => any);
+    onZoomFactorChanged?: ((e: ZoomFactorChangedEvent) => any);
     /**
      * @docid
      * @default true
